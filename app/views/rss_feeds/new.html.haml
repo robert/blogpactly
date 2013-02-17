@@ -1,0 +1,6 @@
+.span12
+  .row-fluid
+    = simple_form_for RssFeed.new do |f|
+      = f.input :url
+      = f.input :title
+      = f.submit "Create"
