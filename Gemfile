@@ -28,6 +28,7 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'mysql2'
 end
 
 group :assets do
@@ -43,7 +44,7 @@ group  :test do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem "capybara"
-  gem "capybara-webkit", "~> 0.14.1"
+  # gem "capybara-webkit", "~> 0.14.1"
   gem "database_cleaner"
   gem "fivemat"
 end
