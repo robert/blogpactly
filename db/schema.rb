@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130217160001) do
+ActiveRecord::Schema.define(:version => 20130217164125) do
 
   create_table "debts", :force => true do |t|
     t.integer  "debtor_id"
@@ -25,8 +25,9 @@ ActiveRecord::Schema.define(:version => 20130217160001) do
   end
 
   create_table "pacts", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.datetime "last_processed_at"
   end
 
   create_table "pacts_users", :id => false, :force => true do |t|

@@ -12,9 +12,19 @@ class Debt < ActiveRecord::Base
 	# Scopes
 	scope :reverse_chronological, order(:created_at).reverse_order
 
-	# Instance Methods
+  before_create :set_defaults
 
-	def paid?
-		self.marked_as_paid_by_creditor? and self.marked_as_paid_by_debtor?
-	end
+  # Instance Methods
+  def paid?
+    self.marked_as_paid_by_creditor? and self.marked_as_paid_by_debtor?
+  end
+
+  private
+    def set_defaults
+      self.amount = 5
+      self.marked_as_paid_by_creditor = false
+      self.marked_as_paid_by_debtor = false
+      true
+    end
+
 end

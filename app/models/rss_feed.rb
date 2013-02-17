@@ -5,6 +5,7 @@ class RssFeed < ActiveRecord::Base
   belongs_to :user
   # ---------
   has_many :posts
+  # ---------
 
   def feedzirra_feed
     Feedzirra::Feed.fetch_and_parse url
@@ -27,8 +28,7 @@ class RssFeed < ActiveRecord::Base
   end
 
   def new_post_between? start, finish
-    posts.find(:all, conditions: ['published_at > ? AND published_at < ?', start, finish] ).any? ||
-    posts.find(:all, conditions: ['created_at > ? AND created_at < ?', start, finish] ).any? 
+    posts.where('published_at > ? AND published_at < ?', start, finish).any?
   end
 
 end
