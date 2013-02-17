@@ -1,0 +1,29 @@
+body {
+  background: #e0e6e1;
+  font-weight: 300;
+  padding: 40px 0;
+  color: #505050;
+  &, .btn, input { font-family: 'Varela Round', helvetica, arial, sans-serif; }
+}
+
+h1, h2, h3, h4 {
+  font-weight: 300;
+  color: #101010;
+}
+
+h1 { 
+  @include inline-block;
+  font-size: 360%;
+  padding-bottom: 20px;
+}
+
+p { margin: 20px 0; }
+
+.btn.btn-main {
+  margin: 15px 0;
+  padding: 8px 16px;
+}
+
+input[type=text], input[type=email], input[type=password] {
+  &, &:focus { @include box-shadow( -1px -1px 0px rgba(0, 0, 0, 0.05) ); }
+} 

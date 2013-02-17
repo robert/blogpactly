@@ -21,6 +21,9 @@ gem "roadie"
 gem "symbolize", :require => "symbolize/active_record"
 gem "colored"
 gem "better_logging"
+gem "bourbon"
+gem "thin"
+gem "quiet_assets"
 
 group :production do
   gem 'pg'
@@ -43,6 +46,8 @@ group  :test do
   gem 'spork-rails'
   gem 'guard-rspec'
   gem 'guard-spork'
+  gem 'guard-livereload'
+  gem 'rb-fsevent', '~> 0.9.1'
   gem "capybara"
   # gem "capybara-webkit", "~> 0.14.1"
   gem "database_cleaner"

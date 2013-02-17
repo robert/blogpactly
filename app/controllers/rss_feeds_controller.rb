@@ -2,6 +2,8 @@ class RssFeedsController < ApplicationController
 
   load_and_authorize_resource :rss_feed
 
+  layout "devise", only: :new
+
   def show
 
   end

@@ -1,0 +1,26 @@
+body {
+  .btn, input[type=text], input[type=email], input[type=password] { 
+    background-image: none; border-width: 0;
+    @include border-top-radius( 2px );
+    @include border-bottom-radius( 2px);
+  }
+
+  input:focus[type] {
+    outline: none;
+  }
+
+  input[type=checkbox] {
+    vertical-align: top;
+    margin: 3px 4px 0 0 ;
+  }
+
+  .tooltip-inner {
+    @include border-top-radius( 10px );
+    @include border-bottom-radius( 10px);
+  }
+
+  .inline { @include inline-block; vertical-align: top }
+
+  .a-r { text-align: right; }
+  .a-c { text-align: center; }
+}
