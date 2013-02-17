@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130217151610) do
+ActiveRecord::Schema.define(:version => 20130217160001) do
 
   create_table "debts", :force => true do |t|
     t.integer  "debtor_id"
     t.integer  "creditor_id"
     t.integer  "pact_id"
     t.integer  "amount"
-    t.boolean  "paid"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.boolean  "marked_as_paid_by_creditor"
+    t.boolean  "marked_as_paid_by_debtor"
   end
 
   create_table "pacts", :force => true do |t|
