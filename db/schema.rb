@@ -11,7 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211201131) do
+ActiveRecord::Schema.define(:version => 20130217151610) do
+
+  create_table "debts", :force => true do |t|
+    t.integer  "debtor_id"
+    t.integer  "creditor_id"
+    t.integer  "pact_id"
+    t.integer  "amount"
+    t.boolean  "paid"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "pacts", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "pacts_users", :id => false, :force => true do |t|
+    t.integer "pact_id"
+    t.integer "user_id"
+  end
+
+  add_index "pacts_users", ["pact_id"], :name => "index_pacts_users_on_pact_id"
+  add_index "pacts_users", ["user_id"], :name => "index_pacts_users_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.integer  "rss_feed_id"
