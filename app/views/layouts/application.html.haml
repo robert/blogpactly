@@ -12,9 +12,22 @@
     %link{href:"http://fonts.googleapis.com/css?family=Varela+Round", rel: "stylesheet", type: "text/css"}
   %body
     .container
-      .span12
-        .row-fluid
-          %h1
-            %span{rel: "tooltip-show", title: ( "Hi yo, #{current_user.name} :)" if user_signed_in? ), data: { placement: "right" } } Blogpact.ly&nbsp;
-
+      .row-fluid
+        .span12
+          %header
+            .navigation.pull-right
+              - if user_signed_in?
+                - if current_user.pacts.any?
+                  = link_to "Overall", user_pacts_path( current_user )
+                  = link_to "Blogpact", user_pact_path( current_user, current_user.pacts.first )
+                - else
+                  = link_to "Create a blogpact", new_pact_path( current_user, current_user.pacts.first )
+                = link_to "Profile", user_path( current_user )
+                = link_to "Logout", destroy_user_session_path, method: :delete
+              - else
+                = link_to "Login", new_user_session_path
+            %h1
+              = link_to root_path do
+                %span{rel: "tooltip-show", title: ( "Hi yo, #{current_user.name} :)" if user_signed_in? ), data: { placement: "right" } } Blogpact.ly&nbsp;
+          %br
           = yield

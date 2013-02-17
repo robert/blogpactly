@@ -12,16 +12,14 @@
     %link{href:"http://fonts.googleapis.com/css?family=Varela+Round", rel: "stylesheet", type: "text/css"}
   %body
     .container
-      .span4.offset4
-        .row-fluid
+      .row-fluid
+        .span4.offset4
           %h1
-            %span{rel: "tooltip-show", title: ( "Hi yo, #{current_user.name} :)" if user_signed_in? ), data: { placement: "right" } } Blogpact.ly&nbsp;
-          %p This is blogpact.ly and blah blah blah.
+            = link_to root_path do
+              %span{rel: "tooltip-show", title: ( "Hi yo, #{current_user.name} :)" if user_signed_in? ), data: { placement: "right" } } Blogpact.ly&nbsp;
 
           - flash.each do |key, msg|
             .alert{class: "alert-#{key}"}
               = msg
 
           = yield
-          - if user_signed_in?
-            = link_to "Logout", destroy_user_session_path, method: :delete, class: "btn"

@@ -1,8 +1,9 @@
+%h3 Step 1: Create your blogpact account
+
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = f.error_notification
   .form-inputs
-    = f.input :name, autofocus: true, input_html: { class: "span12" }
-    = f.input :email, input_html: { class: "span12" }
-    = f.input :password, input_html: { class: "span12" }
-    = f.input :password_confirmation, input_html: { class: "span12" }
+    = f.input :name, autofocus: true, input_html: { class: "span12", placeholder: "Barry Bread" }
+    = f.input :email, input_html: { class: "span12", placeholder: "barry@bread.com" }
+    = f.input :password, input_html: { class: "span12", placeholder: "(minimum 8 characters)" }
   = f.button :submit, "Sign up and start a blog pact now", class: "btn btn-success btn-main"

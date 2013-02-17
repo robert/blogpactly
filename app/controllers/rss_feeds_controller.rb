@@ -14,8 +14,7 @@ class RssFeedsController < ApplicationController
 
   def create
     rss_feed = @current_user.create_rss_feed! params[:rss_feed]
-
-    redirect_to rss_feed_path( rss_feed )
+    redirect_to new_pact_path
   end
 
 end

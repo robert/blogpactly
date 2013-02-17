@@ -1,0 +1,10 @@
+%h3
+  = @user.name
+  %small= @user.email
+
+%p
+  - if @user.rss_feed.present?
+    = @user.rss_feed.title
+    = link_to @user.rss_feed.url
+  - else
+    = link_to "Add your RSS feed to start!", new_rss_feed_path, class: "btn btn-main btn-success"

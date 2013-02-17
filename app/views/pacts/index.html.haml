@@ -1,0 +1,39 @@
+%h3 Your Pacts
+- unless @pacts.empty?
+  %ol
+    - for pact in @pacts
+      %li
+        = pact.users.collect { |user| user.email}.to_sentence
+        (Since #{l pact.created_at, format: :short})
+%h3 You Owe
+- unless @debtors.empty?
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th Creditor
+        %th Amount
+        %th You’ve Paid?
+        %th They’ve Accepted?
+    %tbody
+      - for debt in @debtors
+        %tr{:class => debt.paid? ? 'success' : 'error'}
+          %td= debt.creditor.email
+          %td= number_to_currency debt.amount
+          %td= debt.marked_as_paid_by_debtor? ? 'Yes' : 'No'
+          %td= debt.marked_as_paid_by_creditor? ? 'Yes' : 'No'
+- unless @creditors.empty?
+  %h3 You’re Owed
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th Debtor
+        %th Amount
+        %th They’ve Paid?
+        %th You’ve Accepted?
+    %tbody
+      - for debt in @creditors
+        %tr{:class => debt.paid? ? 'success' : 'error'}
+          %td= debt.debtor.email
+          %td= number_to_currency debt.amount
+          %td= debt.marked_as_paid_by_debtor? ? 'Yes' : 'No'
+          %td= debt.marked_as_paid_by_creditor? ? 'Yes' : 'No'
