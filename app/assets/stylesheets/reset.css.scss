@@ -1,8 +1,6 @@
 body {
   .btn, input[type=text], input[type=email], input[type=password] { 
     background-image: none; border-width: 0;
-    @include border-top-radius( 2px );
-    @include border-bottom-radius( 2px);
   }
 
   input:focus[type] {
@@ -15,8 +13,7 @@ body {
   }
 
   .tooltip-inner {
-    @include border-top-radius( 10px );
-    @include border-bottom-radius( 10px);
+    @include radius( 10px );
   }
 
   .inline { @include inline-block; vertical-align: top }

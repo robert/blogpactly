@@ -13,7 +13,7 @@
   %body
     .container
       .row-fluid
-        .span12
+        .span8.offset2
           %header
             .navigation.pull-right
               - if user_signed_in?
@@ -22,12 +22,15 @@
                   = link_to "Blogpact", user_pact_path( current_user, current_user.pacts.first )
                 - else
                   = link_to "Create a blogpact", new_pact_path( current_user, current_user.pacts.first )
-                = link_to "Profile", user_path( current_user )
+                = link_to "You", user_path( current_user )
                 = link_to "Logout", destroy_user_session_path, method: :delete
               - else
                 = link_to "Login", new_user_session_path
             %h1
               = link_to root_path do
-                %span{rel: "tooltip-show", title: ( "Hi yo, #{current_user.name} :)" if user_signed_in? ), data: { placement: "right" } } Blogpact.ly&nbsp;
+                %span{rel: "tooltip-show", title: ( "Hi yo, #{current_user.name} :)" if user_signed_in? ), data: { placement: "right" } } 
+                  Blogpact
+                  %span.dot> .
+                  ly&nbsp;
           %br
           = yield

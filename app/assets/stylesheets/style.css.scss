@@ -1,13 +1,14 @@
 body {
-  background: #e0e6e1;
+  background: #fff;
   font-weight: 300;
   padding: 40px 0;
-  color: #505050;
+  color: #463;
+  font-size: 82%;
   &, .btn, input { font-family: 'Varela Round', helvetica, arial, sans-serif; }
 }
 
 h1, h2, h3, h4 {
-  color: #101010;
+  color: #241;
 }
 
 h1 { 
@@ -19,14 +20,26 @@ h1 {
 
 p { margin: 20px 0; }
 
-.table { background-color: #fff; @include box-shadow(0 0 1px #a0a6a1) }
+.dot {
+  position: relative;
+  color: #796;
+  -webkit-animation: jump 1s ease-out infinite;
+}
+@-webkit-keyframes jump {
+  0% { top: 0; }
+  70% { top: -12px; }
+  80% { top: -12px; }
+  100% { top: 0; }
+}
+
+.table { background-color: #fff; td { vertical-align: middle; } }
 .btn.btn-main {
   margin: 15px 0;
   padding: 8px 16px;
 }
 
 input[type=text], input[type=email], input[type=password] {
-  &, &:focus { @include box-shadow( -1px -1px 0px rgba(0, 0, 0, 0.05) ); }
+  &, &:focus { @include box-shadow( -1px -1px 0px rgba(0, 0, 0, 0.05)); }
 } 
 
 header {

@@ -1,3 +1,74 @@
-%h3 
-  Pact between 
-  != @pact.users.collect{ |user| link_to user.name, user }.to_sentence
+// they are all fake data, feel free to replace it with real ones..
+
+:ruby
+  pact_date = @pact.created_at.sunday.to_date
+  dates = []
+  while pact_date < Date.today
+    pact_date = pact_date + 1.week
+    dates << pact_date
+  end
+  dates = dates.reverse
+  i = dates.length + 1
+  data = []
+  for date in dates
+    data << { 
+      date: date, 
+      user_1: (((0..5).to_a.sample)%3 != 0), 
+      user_2: (((0..5).to_a.sample)%3 != 0)
+    }
+  end
+
+  owed = 0
+  owe = 0
+  data.each do |row|
+    unless row[:date] > Date.today
+      if row[:user_1] && !row[:user_2]
+        owed = owed + 5
+      elsif !row[:user_1] && row[:user_2]
+        owe = owe + 5
+      end
+    end
+  end
+
+  total = owed - owe
+
+%h4
+  - if total > 0 
+    You have won £#{total} so far.
+  - elsif total < 0
+    You have lost £#{total.abs} so far.
+  - else
+    You 2 are currently even.
+
+%table.table
+  %thead
+    %tr
+      %td --
+      %td= @pact.users.first == current_user ? "You" : @pact.users.first.name
+      %td= @pact.users.last == current_user ? "You" : @pact.users.last.name
+      %td Result
+  %tbody
+    - data.each_with_index do |data, i|
+      %tr
+        %td 
+          Week #{i}
+          %br
+          %small.muted #{l data[:date] - 1.week, format: :long} - #{l data[:date], format: :long}
+
+        - unless data[:date] > Date.today
+          %td= data[:user_1] ? (link_to "#{i.ordinalize} post", "") : "Boo, didn't write one!"
+          %td= data[:user_2] ? (link_to "#{i.ordinalize} post", "") : "Boo, didn't write one!"
+          %td
+            - if data[:user_1] && !data[:user_2]
+              = link_to @pact.users.first.name, @pact.users.first
+              won £5 this week.
+            - elsif !data[:user_1] && data[:user_2]
+              = link_to @pact.users.last.name, @pact.users.last
+              won £5 this week.
+            - elsif data[:user_1] && data[:user_2]
+              No one loses money!
+            - else
+              You 2 both suck.
+        - else
+          %td{colspan: 3}
+            .muted You still have #{distance_of_time_in_words data[:date].to_time - Time.now } to write your post for this week!
