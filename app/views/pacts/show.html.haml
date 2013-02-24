@@ -13,8 +13,8 @@
   for date in dates
     data << { 
       date: date, 
-      user_1: (((0..5).to_a.sample)%3 != 0), 
-      user_2: (((0..5).to_a.sample)%3 != 0)
+      user_1: [true, true, false].sample, 
+      user_2: [true, true, false].sample
     }
   end
 
@@ -30,6 +30,7 @@
     end
   end
 
+  weeks_count = data.length
   total = owed - owe
 
 %h4
@@ -49,26 +50,27 @@
       %td Result
   %tbody
     - data.each_with_index do |data, i|
+      - week = ( weeks_count - i )
       %tr
         %td 
-          Week #{i}
+          Week #{week}
           %br
           %small.muted #{l data[:date] - 1.week, format: :long} - #{l data[:date], format: :long}
 
-        - unless data[:date] > Date.today
-          %td= data[:user_1] ? (link_to "#{i.ordinalize} post", "") : "Boo, didn't write one!"
-          %td= data[:user_2] ? (link_to "#{i.ordinalize} post", "") : "Boo, didn't write one!"
+        - unless data[:date].end_of_day.future?
+          %td= data[:user_1] ? (link_to "#{week.ordinalize} post", "#") : "Boo, didn't write one!"
+          %td= data[:user_2] ? (link_to "#{week.ordinalize} post", "#") : "Boo, didn't write one!"
           %td
             - if data[:user_1] && !data[:user_2]
-              = link_to @pact.users.first.name, @pact.users.first
+              = link_to (@pact.users.first == current_user ? "You" : @pact.users.first.name), @pact.users.first
               won £5 this week.
             - elsif !data[:user_1] && data[:user_2]
-              = link_to @pact.users.last.name, @pact.users.last
+              = link_to (@pact.users.last == current_user ? "You" : @pact.users.last.name), @pact.users.last
               won £5 this week.
             - elsif data[:user_1] && data[:user_2]
               No one loses money!
             - else
-              You 2 both suck.
+              You both suck.
         - else
           %td{colspan: 3}
-            .muted You still have #{distance_of_time_in_words data[:date].to_time - Time.now } to write your post for this week!
+            .muted You still have #{distance_of_time_in_words data[:date].end_of_day.to_time - Time.now } to write your post for this week!

@@ -27,8 +27,8 @@ p { margin: 20px 0; }
 }
 @-webkit-keyframes jump {
   0% { top: 0; }
-  70% { top: -12px; }
-  80% { top: -12px; }
+  70% { top: -12px; opacity: 0.5; }
+  80% { top: -12px; opacity: 0.5; }
   100% { top: 0; }
 }
 
