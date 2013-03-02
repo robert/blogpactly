@@ -24,6 +24,7 @@ gem "better_logging"
 gem "bourbon"
 gem "thin"
 gem "quiet_assets"
+gem "draper", '~> 1.0'
 
 group :production do
   gem 'pg'

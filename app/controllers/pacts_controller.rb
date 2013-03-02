@@ -8,6 +8,7 @@ class PactsController < ApplicationController
   end
 
   def show
+    @pact = @pact.decorate
 	end
 
   def new

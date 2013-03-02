@@ -1,21 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+user1 = User.create(name: 'Mu-An Chiou', email: 'r@muan.co', password: '12345678')
+user2 = User.create(name: 'Robert Heaton', email: 'bobjheaton@gmail.com', password: '12345678')
+user3 = User.create(name: 'John Ngo', email: 'john@smallepic.com', password: '12345678')
 
-creditor = User.create(name: 'Doyle Brunson', email: 'doyle@brunson.com', password: 'supersystem')
-debtor = User.create(name: 'Howard Lederer', email: 'howard@lederer.com', password: 'theprofessor')
-creditor_rss_feed = RssFeed.create(url: 'http://brunson.com/feed.xml', title: 'Super System') do |feed|
-  feed.user_id = creditor.id
+user1_rss_feed = RssFeed.create(url: 'http://muan.co/feed.xml', title: 'How Nice!') do |feed|
+  feed.user_id = user1.id
 end
-debtor_rss_feed = RssFeed.create(url: 'http://lederer.com/feed.xml', title: 'The Professor') do |feed|
-  feed.user_id = debtor.id
+user2_rss_feed = RssFeed.create(url: 'http://robertheaton.com/feed.xml', title: 'Rob Heaton') do |feed|
+  feed.user_id = user2.id
+end
+user3_rss_feed = RssFeed.create(url: 'http://feeds.feedburner.com/non-profiteer', title: 'The Non-Profiteer') do |feed|
+  feed.user_id = user3.id
 end
 
-pact = Pact.create(users: [creditor, debtor], created_at: 10.weeks.ago)
+pact1 = Pact.create(users: [user1, user2], created_at: 4.weeks.ago)
+pact2 = Pact.create(users: [user2, user3], created_at: 5.weeks.ago)
 
-Debt.create(pact: pact, amount: 5, creditor: creditor, debtor: debtor, marked_as_paid_by_creditor: true, marked_as_paid_by_debtor: true)
-Debt.create(pact: pact, amount: 5, creditor: debtor, debtor: creditor)
+Debt.create(pact: pact1, amount: 5, user1: user1, user2: user2, marked_as_paid_by_user1: true, marked_as_paid_by_user2: true)
+Debt.create(pact: pact1, amount: 5, user1: user2, user2: user1)
